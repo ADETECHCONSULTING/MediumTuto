@@ -4,11 +4,18 @@ import android.os.Handler
 
 
 class RepoModel{
-    fun refreshData(onDataReadyCallback: OnDataReadyCallback){
-        Handler().postDelayed({ onDataReadyCallback.onDataReady("new Data")}, 3000)
+
+    fun getRepos(onReposCallBack: OnReposCallBack){
+        var arrayList = ArrayList<Repository>()
+        arrayList.add(Repository("First", "Owner 1", 100 , false))
+        arrayList.add(Repository("Second", "Owner 2", 30 , true))
+        arrayList.add(Repository("Third", "Owner 3", 430 , false))
+
+        Handler().postDelayed({onReposCallBack.onDataReady(arrayList)}, 2000)
     }
 }
 
-interface OnDataReadyCallback{
-    fun onDataReady(data: String)
+
+interface OnReposCallBack{
+    fun onDataReady(data: ArrayList<Repository>)
 }
