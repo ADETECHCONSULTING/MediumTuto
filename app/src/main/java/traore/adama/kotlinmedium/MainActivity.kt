@@ -3,6 +3,7 @@ package traore.adama.kotlinmedium
 import android.databinding.DataBindingUtil
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import traore.adama.kotlinmedium.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -13,6 +14,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        binding.txvRepositoryName.setText("Adama")
+        var repo: Repository = Repository("KotlinMedium", "Adama Tarawalé", 4544, false)
+
+        binding.repo = repo
+        binding.executePendingBindings()
+
+
+        Handler().postDelayed({repo.repoName = "Kotlin Medium 2"}, 2000)
     }
 }
