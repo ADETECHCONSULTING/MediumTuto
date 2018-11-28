@@ -4,7 +4,8 @@
                 xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable name="repo" type="traore.adama.kotlinmedium.Repository"/>
+        <import type="android.view.View"/>
+        <variable name="viewModel" type="traore.adama.kotlinmedium.MainViewModel"/>
     </data>
 
 <android.support.constraint.ConstraintLayout
@@ -25,7 +26,28 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.083"
-            tools:text="@{repo.repoName}" />
+            tools:text="@{viewModel.text}" />
+
+    <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}" android:id="@+id/progressBar"/>
+
+    <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:elevation="4dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:layout_marginBottom="8dp"
+            android:text="@string/refresh"
+            android:onClick="@{() -> viewModel.refresh()}"
+            android:clickable="@{viewModel.isLoading ? false : true}"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="0dp" android:layout_marginEnd="0dp" app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
             android:id="@+id/txv_repository_has_issues"
